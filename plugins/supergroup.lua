@@ -39,7 +39,7 @@ local function check_member_super(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = msg.to.id
       save_data(_config.moderation.data, data)
-	  local text = 'SuperGroup has been added!'
+	  local text = 'SuperGroup ['..msg.to.title..'] has been added!\nUser Info: ['..msg.from.username..'] (['..msg.from.id..'])'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -63,7 +63,7 @@ local function check_member_superrem(cb_extra, success, result)
       end
       data[tostring(groups)][tostring(msg.to.id)] = nil
       save_data(_config.moderation.data, data)
-	  local text = 'SuperGroup has been removed'
+	  local text = 'SuperGroup has been removed by ['..msg.from.id..']'
       return reply_msg(msg.id, text, ok_cb, false)
     end
   end
@@ -104,13 +104,13 @@ end
 
 --Get and output info about supergroup
 local function callback_info(cb_extra, success, result)
-local title ="Info for SuperGroup: ["..result.title.."]\n\n"
-local admin_num = "Admin count: "..result.admins_count.."\n"
-local user_num = "User count: "..result.participants_count.."\n"
-local kicked_num = "Kicked user count: "..result.kicked_count.."\n"
-local channel_id = "ID: "..result.peer_id.."\n"
+local title ="#Info for SuperGroup: ["..result.title.."]\n\n"
+local admin_num = "#Admin count: "..result.admins_count.."\n"
+local user_num = "#User count: "..result.participants_count.."\n"
+local kicked_num = "#Kicked user count: "..result.kicked_count.."\n"
+local channel_id = "#ID: "..result.peer_id.."\n"
 if result.username then
-	channel_username = "Username: @"..result.username
+	channel_username = "#Username: @"..result.username
 else
 	channel_username = ""
 end
@@ -1681,7 +1681,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return ">Your Name: " ..string.gsub(msg.from.print_name, "_", " ").. "\n>Your Username: @"..(msg.from.username or '----').."\n>Your ID: "..msg.from.id.."\n\n>SuperGroup Name: " ..string.gsub(msg.to.print_name, "_", " ").. "\n>SuperGroup ID: "..msg.to.id
+				return "👤Ƴσυя ɴαмɛ: " ..string.gsub(msg.from.print_name, "_", " ").. "\n👤ʊsɛʀɴαмɛ : Telegram.Me/"..(msg.from.username or '----').."\n>🆔Ƴσυяι∂:"..msg.from.id.."\n\n>sυpεʀɢʀoυ℘ ɴαмɛ: " ..string.gsub(msg.to.print_name, "_", " ").. "\n>⚫️sυpεʀɢʀoυ℘ iÐ: "..msg.to.id"\n📱ρнσηє ηυмвєя : +"..(msg.from.phone or '404 Not Found!')
 			end
 		end
 
@@ -2549,7 +2549,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "Message /superhelp to @antispam_shield in private for SuperGroup help"
+			text = "Message /superhelp to @x_R_E_D_B_O_T_x in private for SuperGroup help"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
